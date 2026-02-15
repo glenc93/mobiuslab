@@ -59,5 +59,5 @@ Custom Dracula Dark theme with purple accents:
 
 ## Hosting
 
-I'm currently hosting this application using Amplify in AWS. 
+I'm currently hosting this application using Amplify in AWS hence the amplify.yml file (You can delete if not using Amplify). 
 Amplify is reading the 'main' and  'test' branches and any changes to these branches will trigger a deployment.
