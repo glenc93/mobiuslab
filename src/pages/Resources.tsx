@@ -23,7 +23,7 @@ export default function Resources({ onLogout, user }: ResourcesProps) {
     <div className="downloads">
       <Header onLogout={onLogout} user={user} />
       <main>
-        <h2>Resources</h2>
+        <h2>Downloads</h2>
         <div className="download-list">
           {resources.map((item) => (
             <div key={item.id} className="download-item">

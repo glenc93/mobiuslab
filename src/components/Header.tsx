@@ -25,7 +25,7 @@ export default function Header({ onLogout, user }: HeaderProps) {
               {user?.user_metadata?.full_name || user?.email}
             </div>
             <Link to="/account">Account</Link>
-            <button onClick={handleLogout}>Logout</button>
+            <div onClick={handleLogout} className="dropdown-logout">Logout</div>
           </div>
         </button>
       </div>
