@@ -1,23 +1,39 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { supabase } from './lib/supabase'
 import Login from './components/Login'
 import Dashboard from './components/Dashboard'
 import Downloads from './components/Downloads'
 import './App.css'
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => 
-    localStorage.getItem('isAuthenticated') === 'true'
-  )
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsAuthenticated(!!session)
+      setLoading(false)
+    })
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(!!session)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
 
   const handleLogin = () => {
     setIsAuthenticated(true)
-    localStorage.setItem('isAuthenticated', 'true')
   }
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
     setIsAuthenticated(false)
-    localStorage.removeItem('isAuthenticated')
+  }
+
+  if (loading) {
+    return <div>Loading...</div>
   }
 
   return (

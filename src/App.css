@@ -45,8 +45,17 @@
   cursor: pointer;
 }
 
+.login-box button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .login-box button:hover {
   background: #ff79c6;
+}
+
+.login-box button:disabled:hover {
+  background: #bd93f9;
 }
 
 .dashboard, .downloads {
