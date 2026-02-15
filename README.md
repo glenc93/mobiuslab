@@ -56,3 +56,8 @@ Custom Dracula Dark theme with purple accents:
 - Accent: `#ff79c6`
 - Text: `#f8f8f2`
 - Borders: `#6272a4`
+
+## Hosting
+
+I'm currently hosting this application using Amplify in AWS hence the amplify.yml file (You can delete if not using Amplify). 
+Amplify is reading the 'main' and  'test' branches and any changes to these branches will trigger a deployment.
