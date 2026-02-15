@@ -74,6 +74,23 @@ nav h1 {
   color: #bd93f9;
 }
 
+nav > a {
+  text-decoration: none;
+}
+
+nav > a:hover {
+  background: transparent;
+}
+
+nav a h1 {
+  color: #bd93f9;
+  text-decoration: none;
+}
+
+nav a h1:hover {
+  color: #ff79c6;
+}
+
 nav div {
   display: flex;
   gap: 1rem;
@@ -92,17 +109,83 @@ nav a:hover {
 }
 
 .logout-btn {
-  background: #ff5555;
+  background: #6272a4;
   color: #f8f8f2;
-  padding: 0.5rem 1rem;
+  padding: 0;
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   cursor: pointer;
   font-size: 1rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-weight: 600;
 }
 
 .logout-btn:hover {
-  background: #ff6e6e;
+  background: #bd93f9;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: #44475a;
+  border-radius: 4px;
+  min-width: 150px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.logout-btn:hover .profile-dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.profile-dropdown button,
+.profile-dropdown a {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: #f8f8f2;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 0;
+}
+
+.profile-dropdown button:hover,
+.profile-dropdown a:hover {
+  background: #6272a4;
+}
+
+.profile-dropdown button:first-child,
+.profile-dropdown a:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+.profile-dropdown button:last-child {
+  border-radius: 0 0 4px 4px;
+  color: #ff5555;
+}
+
+.dropdown-user-info {
+  padding: 0.75rem 1rem;
+  color: #bd93f9;
+  font-weight: 600;
+  border-bottom: 1px solid #6272a4;
+  font-size: 0.9rem;
 }
 
 main {
@@ -149,4 +232,70 @@ main h2 {
 
 .download-item a:hover {
   background: #ff79c6;
+}
+
+.account-container {
+  max-width: 600px;
+  margin-top: 2rem;
+}
+
+.account-section {
+  background: #44475a;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.account-section h3 {
+  margin-bottom: 1.5rem;
+  color: #bd93f9;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #f8f8f2;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #6272a4;
+  border-radius: 4px;
+  background: #282a36;
+  color: #f8f8f2;
+  font-size: 1rem;
+}
+
+.form-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.account-section button[type="submit"] {
+  padding: 0.75rem 1.5rem;
+  background: #bd93f9;
+  color: #282a36;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.account-section button[type="submit"]:hover {
+  background: #ff79c6;
+}
+
+.account-section button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.account-section button[type="submit"]:disabled:hover {
+  background: #bd93f9;
 }

@@ -1,24 +1,19 @@
-import { Link, useNavigate } from 'react-router-dom'
+import Header from '../components/Header'
 
-interface DownloadItem {
+interface ResourceItem {
   id: number
   name: string
   size: string
   url: string
 }
 
-interface DownloadsProps {
+interface ResourcesProps {
   onLogout: () => void
+  user: any
 }
 
-export default function Downloads({ onLogout }: DownloadsProps) {
-  const navigate = useNavigate()
-
-  const handleLogout = () => {
-    onLogout()
-    navigate('/login')
-  }
-  const downloads: DownloadItem[] = [
+export default function Resources({ onLogout, user }: ResourcesProps) {
+  const resources: ResourceItem[] = [
     { id: 1, name: 'Sample Document.pdf', size: '2.5 MB', url: '#' },
     { id: 2, name: 'Project Files.zip', size: '15.3 MB', url: '#' },
     { id: 3, name: 'User Guide.docx', size: '1.2 MB', url: '#' },
@@ -26,17 +21,11 @@ export default function Downloads({ onLogout }: DownloadsProps) {
 
   return (
     <div className="downloads">
-      <nav>
-        <h1>MobiusLab</h1>
-        <div>
-          <Link to="/dashboard">Dashboard</Link>
-          <button onClick={handleLogout} className="logout-btn">Logout</button>
-        </div>
-      </nav>
+      <Header onLogout={onLogout} user={user} />
       <main>
-        <h2>Downloads</h2>
+        <h2>Resources</h2>
         <div className="download-list">
-          {downloads.map((item) => (
+          {resources.map((item) => (
             <div key={item.id} className="download-item">
               <div>
                 <h3>{item.name}</h3>

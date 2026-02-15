@@ -1,23 +1,27 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { supabase } from './lib/supabase'
-import Login from './components/Login'
-import Dashboard from './components/Dashboard'
-import Downloads from './components/Downloads'
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+import Resources from './pages/Resources'
+import Account from './pages/Account'
 import './App.css'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [user, setUser] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setIsAuthenticated(!!session)
+      setUser(session?.user || null)
       setLoading(false)
     })
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setIsAuthenticated(!!session)
+      setUser(session?.user || null)
     })
 
     return () => subscription.unsubscribe()
@@ -42,13 +46,17 @@ function App() {
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route 
           path="/dashboard" 
-          element={isAuthenticated ? <Dashboard onLogout={handleLogout} /> : <Navigate to="/login" />} 
+          element={isAuthenticated ? <Dashboard onLogout={handleLogout} user={user} /> : <Navigate to="/login" />} 
         />
         <Route 
-          path="/downloads" 
-          element={isAuthenticated ? <Downloads onLogout={handleLogout} /> : <Navigate to="/login" />} 
+          path="/resources" 
+          element={isAuthenticated ? <Resources onLogout={handleLogout} user={user} /> : <Navigate to="/login" />} 
         />
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route 
+          path="/account" 
+          element={isAuthenticated ? <Account onLogout={handleLogout} user={user} /> : <Navigate to="/login" />} 
+        />
+        <Route path="/" element={<Navigate to="/dashboard" />} />
       </Routes>
     </BrowserRouter>
   )
