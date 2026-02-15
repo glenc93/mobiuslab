@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 interface DownloadItem {
   id: number
@@ -7,7 +7,17 @@ interface DownloadItem {
   url: string
 }
 
-export default function Downloads() {
+interface DownloadsProps {
+  onLogout: () => void
+}
+
+export default function Downloads({ onLogout }: DownloadsProps) {
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    onLogout()
+    navigate('/login')
+  }
   const downloads: DownloadItem[] = [
     { id: 1, name: 'Sample Document.pdf', size: '2.5 MB', url: '#' },
     { id: 2, name: 'Project Files.zip', size: '15.3 MB', url: '#' },
@@ -18,7 +28,10 @@ export default function Downloads() {
     <div className="downloads">
       <nav>
         <h1>MobiusLab</h1>
-        <Link to="/dashboard">Dashboard</Link>
+        <div>
+          <Link to="/dashboard">Dashboard</Link>
+          <button onClick={handleLogout} className="logout-btn">Logout</button>
+        </div>
       </nav>
       <main>
         <h2>Downloads</h2>

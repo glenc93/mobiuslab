@@ -1,11 +1,25 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-export default function Dashboard() {
+interface DashboardProps {
+  onLogout: () => void
+}
+
+export default function Dashboard({ onLogout }: DashboardProps) {
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    onLogout()
+    navigate('/login')
+  }
+
   return (
     <div className="dashboard">
       <nav>
         <h1>MobiusLab</h1>
-        <Link to="/downloads">Downloads</Link>
+        <div>
+          <Link to="/downloads">Downloads</Link>
+          <button onClick={handleLogout} className="logout-btn">Logout</button>
+        </div>
       </nav>
       <main>
         <h2>Welcome to MobiusLab</h2>
